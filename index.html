@@ -108,6 +108,29 @@ footer p{margin:0 0 .4rem}
   .channels{grid-template-columns:repeat(4,1fr)}
   section{padding:2.2rem 2.4rem}
 }
+
+/* DESCENDANTS */
+.desc-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 0 1.3rem}
+.desc-tabs button{font:inherit;font-weight:600;font-size:.95rem;color:var(--ink);background:transparent;border:2px solid var(--line);border-radius:2rem;padding:.45rem 1rem;cursor:pointer;min-height:2.5rem;text-align:left}
+.desc-tabs button[aria-selected="true"]{background:var(--mauve);border-color:var(--mauve);color:var(--btn-ink)}
+.desc-tabs button:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(8.5rem,1fr));gap:1.1rem}
+.mb{margin:0;text-align:center}
+.mb .ph{aspect-ratio:1;border-radius:.8rem;border:3px solid var(--sky);overflow:hidden;background:var(--mauve);display:grid;place-items:center;color:#fff;font-family:Spectral,Georgia,serif;font-size:2.2rem;font-weight:600}
+.mb img{width:100%;height:100%;object-fit:cover;display:block}
+.mb b{display:block;margin-top:.5rem;font-size:.98rem;line-height:1.25}
+.mb .rl{color:var(--muted);font-size:.85rem}
+.tools{display:none;gap:.4rem;justify-content:center;margin-top:.4rem}
+.editing .tools{display:flex}
+.tools button{font:inherit;font-size:.8rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:.4rem;padding:.2rem .5rem;cursor:pointer}
+.gal .empty{grid-column:1/-1;color:var(--muted)}
+.mgr{margin-top:1.6rem;border-top:1px dashed var(--line);padding-top:1.2rem}
+.mgr-panel{display:none;margin-top:1rem}
+.editing .mgr-panel{display:block}
+.row2{display:grid;gap:.9rem}
+@media(min-width:36rem){.row2{grid-template-columns:1fr 1fr}}
+select{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:.5rem;padding:.7rem .8rem;width:100%}
+select:focus{outline:3px solid var(--sky);border-color:var(--mauve)}
 </style>
 </head>
 <body>
@@ -128,6 +151,7 @@ footer p{margin:0 0 .4rem}
 <nav aria-label="Sections">
   <a href="#hommage">Hommage</a>
   <a href="#biographie">Biographie</a>
+  <a href="#descendants">Descendants</a>
   <a href="#heritage">Héritage</a>
   <a href="#temoignages">Témoignages</a>
   <a href="#livre-or">Livre d’or</a>
@@ -158,13 +182,48 @@ footer p{margin:0 0 .4rem}
   <h3 style="margin:2rem 0 1rem">Parcours</h3>
   <ol class="tl">
     <li><b>1944</b>Naissance à Shanga, en territoire de Masisi, chefferie de Bashali, Bashali-Mokoto.</li>
-    <li><b>Dès 1970</b>Commerçant depuis sa jeunesse.</li>
-    <li><b>1980</b>Capita de la localité de Lupfunda.</li>
-    <li><b>1995</b>Chef de la localité de Lupfunda.</li>
-    <li><b>De 1998 à 2026</b>Chef de famille (Mwami) de la localité de Lupfunda, jusqu’à son décès.</li>
+    <li><b>De 1960 à 1990</b>Exerce le commerce.</li>
+    <li><b>1990</b>Élu chef de la localité de Lupfunda par la population.</li>
+    <li><b>De 1998 à 2026</b>Chef de famille (Mwami) et pacificateur de tout Masisi, jusqu’à son décès.</li>
     <li><b>2026</b>Décès à Busumba, le 18 octobre.</li>
   </ol>
   <p>Depuis sa jeunesse, Mzee Erasto est resté engagé auprès des communautés de Masisi dans la résolution pacifique des conflits, particulièrement dans le groupement de Bashali-Mokoto.</p>
+</section>
+
+<section id="descendants">
+  <h2>Descendants</h2>
+  <p>Les enfants, petits-enfants et arrière-petits-enfants de Mzee Erasto, réunis dans une galerie de famille.</p>
+  <div class="desc-tabs" role="tablist" aria-label="Générations">
+    <button type="button" role="tab" id="tab-e" data-g="e" aria-selected="true"></button>
+    <button type="button" role="tab" id="tab-p" data-g="p" aria-selected="false"></button>
+  </div>
+  <div id="gal" class="gal" role="tabpanel"></div>
+  <div class="mgr">
+    <button class="btn alt" id="mgr-toggle" type="button" aria-expanded="false">Gérer la galerie</button>
+    <div class="mgr-panel">
+      <p>Ajoutez un nom et une photo pour chaque membre (160 au maximum). Vos ajouts restent d’abord sur cet appareil : quand vous avez terminé, téléchargez la page mise à jour et remplacez l’ancien fichier du site.</p>
+      <form id="mf" onsubmit="return false">
+        <div class="row2">
+          <label>Nom complet<input id="mf-name" type="text" maxlength="60" autocomplete="off"></label>
+          <label>Photo (facultative)<input id="mf-photo" type="file" accept="image/*"></label>
+        </div>
+        <div class="row2">
+          <label>Génération<select id="mf-g"><option value="e">Fils et filles</option><option value="p">Petits-enfants et arrière-petits-enfants</option></select></label>
+          <label>Lien de parenté<select id="mf-r"></select></label>
+        </div>
+        <div class="btns" style="margin-top:0">
+          <button class="btn" id="mf-save" type="button">Ajouter à la galerie</button>
+          <button class="btn alt" id="mf-cancel" type="button" hidden>Annuler la modification</button>
+        </div>
+      </form>
+      <div id="mf-status" class="status" role="status" aria-live="polite"></div>
+      <p id="mf-count" style="color:var(--muted);font-size:.95rem"></p>
+      <div class="btns" style="margin-top:0">
+        <button class="btn" id="mf-export" type="button">Télécharger la page mise à jour</button>
+        <button class="btn alt" id="mf-reset" type="button">Annuler mes modifications</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="heritage">
@@ -333,6 +392,115 @@ footer p{margin:0 0 .4rem}
     if(FAMILY_WHATSAPP){window.open('https://wa.me/'+FAMILY_WHATSAPP+'?text='+encodeURIComponent(m),'_blank');}
     else{copyText(m,cs); say(cs,'Message copié. Le WhatsApp de la famille sera bientôt indiqué.');}
   });
+})();
+</script>
+<script type="application/json" id="desc-data">[{"n": "Bahati Musanga Erasto", "r": "Fils", "g": "e", "p": ""}, {"n": "Gacheri Musanga", "r": "Fils", "g": "e", "p": ""}, {"n": "Issa Musanga", "r": "Fils", "g": "e", "p": ""}, {"n": "Gadje Musanga Joseph", "r": "Fils", "g": "e", "p": ""}, {"n": "Julienne Musanga", "r": "Fille", "g": "e", "p": ""}, {"n": "Papin Musanga", "r": "Fils", "g": "e", "p": ""}, {"n": "Kamanzi Musanga", "r": "Fils", "g": "e", "p": ""}, {"n": "Dada Musanga", "r": "Fille", "g": "e", "p": ""}]</script>
+<script>
+(function(){
+  var MAX=160,KEY='musanga-desc-v1';
+  var RELS={e:['Fils','Fille'],p:['Petit-fils','Petite-fille','Arrière-petit-fils','Arrière-petite-fille']};
+  var LBL={e:'Fils et filles',p:'Petits-enfants et arrière-petits-enfants'};
+  var $=function(i){return document.getElementById(i);};
+  var sec=$('descendants'),gal=$('gal'),st=$('mf-status');
+  var data=[],g='e',edit=-1,photo=null;
+  try{data=JSON.parse($('desc-data').textContent);}catch(e){}
+  try{var d=localStorage.getItem(KEY);if(d){data=JSON.parse(d);}}catch(e){}
+
+  function persist(){
+    try{localStorage.setItem(KEY,JSON.stringify(data));return true;}
+    catch(e){st.textContent='Mémoire de l’appareil pleine : téléchargez la page mise à jour pour ne rien perdre.';return false;}
+  }
+  function initials(n){return n.split(/\s+/).filter(Boolean).slice(0,2).map(function(w){return w[0].toUpperCase();}).join('');}
+  function fillRel(sel){
+    var gg=$('mf-g').value,r=$('mf-r');r.innerHTML='';
+    RELS[gg].forEach(function(x){var o=document.createElement('option');o.textContent=x;r.appendChild(o);});
+    if(sel){r.value=sel;}
+  }
+  function render(){
+    ['e','p'].forEach(function(k){
+      var n=data.filter(function(m){return m.g===k;}).length,t=$('tab-'+k);
+      t.textContent=LBL[k]+' ('+n+')';t.setAttribute('aria-selected',String(k===g));
+    });
+    gal.innerHTML='';var shown=0;
+    data.forEach(function(m,i){
+      if(m.g!==g){return;}shown++;
+      var f=document.createElement('figure');f.className='mb';
+      var ph=document.createElement('div');ph.className='ph';
+      if(m.p){var im=new Image();im.src=m.p;im.alt='Photo de '+m.n;im.loading='lazy';ph.appendChild(im);}else{ph.textContent=initials(m.n);}
+      var b=document.createElement('b');b.textContent=m.n;
+      var r=document.createElement('span');r.className='rl';r.textContent=m.r;
+      var t=document.createElement('div');t.className='tools';
+      t.innerHTML='<button type="button">Modifier</button><button type="button">Supprimer</button>';
+      t.children[0].onclick=function(){startEdit(i);};
+      t.children[1].onclick=function(){if(confirm('Supprimer '+m.n+' de la galerie ?')){data.splice(i,1);persist();render();}};
+      f.append(ph,b,r,t);gal.appendChild(f);
+    });
+    if(!shown){var e=document.createElement('p');e.className='empty';e.textContent='Aucun membre dans cette génération pour le moment.';gal.appendChild(e);}
+    $('mf-count').textContent=data.length+' / '+MAX+' membres dans la galerie';
+  }
+  function resetForm(){
+    $('mf-name').value='';$('mf-photo').value='';photo=null;edit=-1;
+    $('mf-save').textContent='Ajouter à la galerie';$('mf-cancel').hidden=true;
+  }
+  function startEdit(i){
+    var m=data[i];edit=i;photo=null;
+    $('mf-name').value=m.n;$('mf-g').value=m.g;fillRel(m.r);
+    $('mf-save').textContent='Enregistrer la modification';$('mf-cancel').hidden=false;
+    st.textContent='Modification de '+m.n+' : choisissez une nouvelle photo seulement si vous voulez la remplacer.';
+    $('mf-name').focus();
+  }
+  document.querySelectorAll('.desc-tabs button').forEach(function(b){
+    b.onclick=function(){g=b.getAttribute('data-g');if(edit<0){$('mf-g').value=g;fillRel();}render();};
+  });
+  $('mf-g').onchange=function(){fillRel();};
+  $('mgr-toggle').onclick=function(){
+    var on=sec.classList.toggle('editing');
+    this.setAttribute('aria-expanded',String(on));
+    this.textContent=on?'Fermer la gestion':'Gérer la galerie';
+  };
+  $('mf-photo').onchange=function(){
+    var f=this.files[0];if(!f){photo=null;return;}
+    var rd=new FileReader();
+    rd.onload=function(){
+      var im=new Image();
+      im.onload=function(){
+        var s=Math.min(im.width,im.height),c=document.createElement('canvas');
+        c.width=c.height=300;
+        c.getContext('2d').drawImage(im,(im.width-s)/2,(im.height-s)*.3,s,s,0,0,300,300);
+        photo=c.toDataURL('image/jpeg',.74);st.textContent='Photo prête.';
+      };
+      im.onerror=function(){st.textContent='Cette image ne peut pas être lue. Essayez un fichier JPG ou PNG.';};
+      im.src=rd.result;
+    };
+    rd.readAsDataURL(f);
+  };
+  $('mf-save').onclick=function(){
+    var n=$('mf-name').value.trim();
+    if(!n){st.textContent='Indiquez le nom du membre.';return;}
+    var m={n:n,g:$('mf-g').value,r:$('mf-r').value,p:photo!==null?photo:(edit>-1?data[edit].p:'')};
+    if(edit>-1){data[edit]=m;}
+    else{if(data.length>=MAX){st.textContent='La galerie est complète : 160 membres au maximum.';return;}data.push(m);}
+    g=m.g;var ok=persist();resetForm();render();
+    if(ok){st.textContent=n+' est enregistré(e). Pensez à télécharger la page mise à jour.';}
+  };
+  $('mf-cancel').onclick=function(){resetForm();st.textContent='';};
+  $('mf-reset').onclick=function(){
+    if(confirm('Effacer les modifications faites sur cet appareil et revenir à la galerie du site ?')){
+      try{localStorage.removeItem(KEY);}catch(e){}location.reload();
+    }
+  };
+  $('mf-export').onclick=function(){
+    $('desc-data').textContent=JSON.stringify(data).replace(/</g,'\\u003c');
+    var c=document.documentElement.cloneNode(true);
+    c.querySelector('#gal').innerHTML='';
+    c.querySelector('#descendants').classList.remove('editing');
+    var tg=c.querySelector('#mgr-toggle');tg.setAttribute('aria-expanded','false');tg.textContent='Gérer la galerie';
+    var blob=new Blob(['<!DOCTYPE html>\n'+c.outerHTML],{type:'text/html'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';
+    document.body.appendChild(a);a.click();a.remove();
+    st.textContent='Fichier index.html téléchargé : remplacez l’ancien fichier du site par celui-ci.';
+  };
+  fillRel();render();
 })();
 </script>
 </body>
