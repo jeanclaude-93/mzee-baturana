@@ -131,6 +131,48 @@ footer p{margin:0 0 .4rem}
 @media(min-width:36rem){.row2{grid-template-columns:1fr 1fr}}
 select{font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:.5rem;padding:.7rem .8rem;width:100%}
 select:focus{outline:3px solid var(--sky);border-color:var(--mauve)}
+
+/* DESIGN : menu et corps de page */
+nav{display:flex;gap:.25rem;padding:calc(.55rem + env(safe-area-inset-top,0px)) .8rem .55rem;background:var(--surface);background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);box-shadow:none;scrollbar-width:none;text-align:left}
+nav::-webkit-scrollbar{display:none}
+nav a{flex:none;padding:.45rem .95rem;font-size:.92rem;font-weight:600;color:var(--muted);transition:background .2s,color .2s}
+nav a:hover,nav a:focus-visible{background:var(--sky-soft);color:var(--ink);outline:0}
+nav a:focus-visible{outline:2px solid var(--mauve)}
+nav a.on{background:var(--mauve);color:var(--btn-ink)}
+main{padding:.5rem 1.2rem 0}
+section{background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;margin:0 auto;padding:2.8rem 0}
+h2{display:flex;align-items:center;gap:.8rem;font-size:clamp(1.8rem,5vw,2.3rem);font-weight:700;letter-spacing:-.01em;color:var(--ink);margin-bottom:1.3rem}
+h2::before{content:"";flex:none;width:.45rem;height:1.5em;border-radius:.3rem;background:linear-gradient(var(--mauve),var(--sky))}
+h2::after{display:none}
+.lead{font-size:1.4rem}
+dl{gap:0}
+dl>div{padding:.9rem 0}
+dt{text-transform:none;letter-spacing:0;font-weight:600;font-size:.9rem}
+@media(min-width:40rem){dl{grid-template-columns:1fr 1fr;column-gap:2.5rem}}
+.tl{border-left:2px solid var(--line)}
+.tl li::before{left:-1.7rem;top:.35rem;width:1rem;height:1rem;background:var(--surface);border:3px solid var(--mauve)}
+.tl li:last-child::before{background:var(--mauve)}
+.tl b{color:var(--mauve);font-size:1.25rem}
+ul.acts{list-style:none;padding:0;display:grid;gap:.6rem}
+ul.acts li{position:relative;margin:0;padding:.75rem .9rem .75rem 2.5rem;background:var(--surface);border:1px solid var(--line);border-radius:.7rem}
+ul.acts li::before{content:"";position:absolute;left:1rem;top:1.1rem;width:.55rem;height:.55rem;border-radius:50%;background:var(--mauve);box-shadow:0 0 0 4px var(--sky-soft)}
+@media(min-width:40rem){ul.acts{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border-radius:.9rem;padding:1.3rem 1.4rem}
+blockquote{font-family:Spectral,Georgia,serif;font-size:1.12rem;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--mauve);border-radius:.9rem;padding:1.3rem 1.4rem}
+blockquote .sign{font-family:"Public Sans",system-ui,sans-serif;font-size:1rem}
+.ev{display:grid;grid-template-columns:5rem 1fr;gap:1rem;align-items:start;padding:1rem 0;border-bottom:1px dashed var(--line)}
+.ev:last-of-type{border-bottom:0}
+.when{background:var(--mauve);color:var(--btn-ink);border-radius:.8rem;text-align:center;padding:.55rem .3rem;line-height:1.1}
+.when b{display:block;font-family:Spectral,Georgia,serif;font-size:1.35rem}
+.when span{font-size:.8rem}
+.ev h3{font-size:1.2rem;margin-bottom:.2rem}
+.ev p{margin:0}
+.btn{border-radius:2rem;padding:.8rem 1.5rem;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.mb .ph{box-shadow:0 4px 14px rgba(59,38,112,.18)}
+.contact{border-radius:1.3rem;padding:2.2rem 1.4rem;margin:1.8rem auto 0}
+@media(min-width:48rem){nav{justify-content:center}.contact{padding:2.6rem 2.4rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -182,7 +224,9 @@ select:focus{outline:3px solid var(--sky);border-color:var(--mauve)}
   <h3 style="margin:2rem 0 1rem">Parcours</h3>
   <ol class="tl">
     <li><b>1944</b>Naissance à Shanga, en territoire de Masisi, chefferie de Bashali, Bashali-Mokoto.</li>
-    <li><b>De 1960 à 1990</b>Exerce le commerce.</li>
+    <li><b>1950</b>Études primaires à l’EP Shanga.</li>
+    <li><b>1960</b>Gardien de vaches de son feu père.</li>
+    <li><b>De 1970 à 1990</b>Commerçant.</li>
     <li><b>1990</b>Élu chef de la localité de Lupfunda par la population.</li>
     <li><b>De 1998 à 2026</b>Chef de famille (Mwami) et pacificateur de tout Masisi, jusqu’à son décès.</li>
     <li><b>2026</b>Décès à Busumba, le 18 octobre.</li>
@@ -274,12 +318,10 @@ select:focus{outline:3px solid var(--sky);border-color:var(--mauve)}
 
 <section id="obseques">
   <h2>Informations sur les obsèques</h2>
-  <div class="card">
-    <p><b>Du 19 au 24 octobre : veillée mortuaire</b><br>Au domicile du défunt, quartier Himbi, Rue Bienheureuse, en haut de l’ancien hôtel Boneza.</p>
-    <p><b>Samedi 24 octobre : levée du corps</b><br>À la morgue de l’Hôpital provincial du Nord-Kivu.</p>
-    <p style="margin:0"><b>Dimanche 25 octobre : inhumation</b><br>Dans son fief naturel. <span class="todo">[heure à préciser]</span></p>
-  </div>
-  <p>Pour joindre la famille, voir la rubrique <a href="#contact">Contact</a> en bas de page.</p>
+  <div class="ev"><div class="when"><b>19–24</b><span>octobre</span></div><div><h3>Veillée mortuaire</h3><p>Au domicile du défunt, quartier Himbi, Rue Bienheureuse, en haut de l’ancien hôtel Boneza.</p></div></div>
+  <div class="ev"><div class="when"><b>24</b><span>octobre</span></div><div><h3>Levée du corps</h3><p>Samedi, à la morgue de l’Hôpital provincial du Nord-Kivu.</p></div></div>
+  <div class="ev"><div class="when"><b>25</b><span>octobre</span></div><div><h3>Inhumation</h3><p>Dimanche, dans son fief naturel. <span class="todo">[heure à préciser]</span></p></div></div>
+  <p style="margin-top:1rem">Pour joindre la famille, voir la rubrique <a href="#contact">Contact</a> en bas de page.</p>
 </section>
 <section id="contact" class="contact">
   <h2>Contacter la famille Musanga</h2>
@@ -492,7 +534,7 @@ select:focus{outline:3px solid var(--sky);border-color:var(--mauve)}
   $('mf-export').onclick=function(){
     $('desc-data').textContent=JSON.stringify(data).replace(/</g,'\\u003c');
     var c=document.documentElement.cloneNode(true);
-    c.querySelector('#gal').innerHTML='';
+    c.querySelector('#gal').innerHTML='';c.querySelectorAll('nav a.on').forEach(function(x){x.classList.remove('on');x.removeAttribute('aria-current');});
     c.querySelector('#descendants').classList.remove('editing');
     var tg=c.querySelector('#mgr-toggle');tg.setAttribute('aria-expanded','false');tg.textContent='Gérer la galerie';
     var blob=new Blob(['<!DOCTYPE html>\n'+c.outerHTML],{type:'text/html'});
@@ -501,6 +543,23 @@ select:focus{outline:3px solid var(--sky);border-color:var(--mauve)}
     st.textContent='Fichier index.html téléchargé : remplacez l’ancien fichier du site par celui-ci.';
   };
   fillRel();render();
+})();
+</script>
+<script>
+(function(){
+  if(!('IntersectionObserver' in window)){return;}
+  var nv=document.querySelector('nav'),links=[].slice.call(nv.querySelectorAll('a')),map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting){return;}
+      links.forEach(function(a){a.classList.remove('on');a.removeAttribute('aria-current');});
+      var a=map[e.target.id];if(!a){return;}
+      a.classList.add('on');a.setAttribute('aria-current','true');
+      nv.scrollTo({left:a.offsetLeft-nv.clientWidth/2+a.offsetWidth/2,behavior:'smooth'});
+    });
+  },{rootMargin:'-30% 0px -60% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el){io.observe(el);}});
 })();
 </script>
 </body>
